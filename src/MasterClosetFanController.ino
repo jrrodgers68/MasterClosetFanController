@@ -27,7 +27,8 @@ FanScheduler* fanScheduler = NULL;
      Time.zone(-5);
      Particle.syncTime();
 
-     fanScheduler = FanSchedulerFactory::instance()->getScheduler(FanSchedulerFactory::DURATION);
+     //fanScheduler = FanSchedulerFactory::instance()->getScheduler(FanSchedulerFactory::DURATION);
+     fanScheduler = FanSchedulerFactory::instance()->getScheduler(FanSchedulerFactory::TEMPERATURE);
 
      fanScheduler->init();
  }
@@ -38,7 +39,7 @@ FanScheduler* fanScheduler = NULL;
      if (Particle.connected() == false)
      {
          Particle.connect();
-         waitFor(Particle.connected, 30000);
+         waitFor(Particle.connected, 10000);
      }
 
      // basic logic - if switch is ON, just run the fan.  If off, run if its the scheduled time - otherwise fan is off

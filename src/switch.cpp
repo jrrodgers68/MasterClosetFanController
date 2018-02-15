@@ -14,6 +14,8 @@ Switch::Switch(int pin) : _switchPin(pin)
 bool Switch::getSwitchState()
 {
     // bail out limit so we don't get stuck waiting on the debounce
+    // fixme: change algo to be time based, so limit is 100ms
+    
     const long BAIL_OUT = 25000;
     int previousRead = -1;
 
@@ -36,6 +38,7 @@ bool Switch::getSwitchState()
         }
 
         previousRead = value;
+        Particle.process();
     }
 
     // SHOULD NEVER GET HERE!!

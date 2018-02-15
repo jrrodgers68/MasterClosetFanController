@@ -26,7 +26,7 @@ public:
 private:
     FanSchedulerFactory();
 
-    FanScheduler* _cachedSchedulers[2];
+    FanScheduler* _cachedSchedulers[2] = {};
 
     static FanSchedulerFactory* _instance;
 };

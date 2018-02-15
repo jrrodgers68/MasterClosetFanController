@@ -30,6 +30,11 @@ void TemperatureFanScheduler::fini()
 
 bool TemperatureFanScheduler::isTimeToRun()
 {
+    if((_lastRoomTemp == 0) || (_lastClosetTemp == 0))
+    {
+        return false;
+    }
+
     // basic idea - compare our temps, if closet is off by more than 2 degrees, run fan
     return (abs(_lastClosetTemp - _lastRoomTemp) > 2);
 }
