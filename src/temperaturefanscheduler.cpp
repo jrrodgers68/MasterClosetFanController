@@ -2,6 +2,7 @@
 #include "temperaturefanscheduler.h"
 #include "constants.h"
 
+
 #define CLOSET_TEMP   "MC1TEMP"
 #define ROOM_TEMP     "SITRMTEMP"
 
@@ -46,7 +47,8 @@ void TemperatureFanScheduler::temperatureCallback(const char* event, const char*
 {
     if(data)
     {
-        int value = atoi(data);
+        String dataStr(data);
+        int value  = (int)(dataStr.toFloat() + 0.5f);
         String closetTemp(CLOSET_TEMP);
         String roomTemp(ROOM_TEMP);
         if(closetTemp.compareTo(event) == 0)
