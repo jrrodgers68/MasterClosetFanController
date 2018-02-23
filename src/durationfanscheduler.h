@@ -13,7 +13,7 @@ public:
     virtual ~DurationFanScheduler();
     virtual void init();
     virtual void fini();
-    virtual bool isTimeToRun();
+    virtual bool isTimeToRun(int fanState);
 
 private:
     int _lastRun = 0;

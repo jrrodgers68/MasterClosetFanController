@@ -1,5 +1,6 @@
 #include "Particle.h"
 #include "temperaturefanscheduler.h"
+#include "constants.h"
 
 #define CLOSET_TEMP   "MC1TEMP"
 #define ROOM_TEMP     "SITRMTEMP"
@@ -28,15 +29,17 @@ void TemperatureFanScheduler::fini()
     // nothing to do here
 }
 
-bool TemperatureFanScheduler::isTimeToRun()
+bool TemperatureFanScheduler::isTimeToRun(int fanState)
 {
     if((_lastRoomTemp == 0) || (_lastClosetTemp == 0))
     {
         return false;
     }
 
+    int comparitor = (fanState == ON ? 0 : 2);
+
     // basic idea - compare our temps, if closet is off by more than 2 degrees, run fan
-    return (abs(_lastClosetTemp - _lastRoomTemp) > 2);
+    return (abs(_lastClosetTemp - _lastRoomTemp) > comparitor);
 }
 
 void TemperatureFanScheduler::temperatureCallback(const char* event, const char* data)

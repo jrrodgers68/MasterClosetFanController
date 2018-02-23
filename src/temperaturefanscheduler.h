@@ -13,7 +13,7 @@ public:
 
     virtual void init();
     virtual void fini();
-    virtual bool isTimeToRun();
+    virtual bool isTimeToRun(int fanState);
 
 private:
     int _lastClosetTemp = 0;

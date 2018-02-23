@@ -28,6 +28,11 @@ void Fan::setFanState(int state)
 }
 
 
+int Fan::getFanState()
+{
+    return _lastFanState;
+}
+
 time_t Fan::getLastRunStart()
 {
     return _lastRunStart;

@@ -10,7 +10,7 @@ DurationFanScheduler::DurationFanScheduler()
 
 DurationFanScheduler::~DurationFanScheduler()
 {
-    
+
 }
 
 void DurationFanScheduler::init()
@@ -28,7 +28,7 @@ void DurationFanScheduler::fini()
     // we can't unregister our variables...
 }
 
-bool DurationFanScheduler::isTimeToRun()
+bool DurationFanScheduler::isTimeToRun(int fanState)
 {
     // returns true if it is time to run based on the duration, cycle, and last run time
     // first, figure out which cycle we are in

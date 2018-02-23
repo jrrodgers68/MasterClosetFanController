@@ -49,7 +49,7 @@ bool gMinRunMode = false;
      }
      else
      {
-         int state = fanScheduler->isTimeToRun() ? ON : OFF;
+         int state = fanScheduler->isTimeToRun(fan.getFanState()) ? ON : OFF;
 
          if(state == OFF)
          {

@@ -11,7 +11,7 @@ public:
     virtual void fini() = 0;
 
     // called in loop every time
-    virtual bool isTimeToRun() = 0;
+    virtual bool isTimeToRun(int fanState) = 0;
 
 };
 

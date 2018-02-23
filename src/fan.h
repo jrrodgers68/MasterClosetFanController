@@ -9,6 +9,7 @@ public:
     Fan(int relayPin);
 
     void setFanState(int state);
+    int  getFanState();
 
     time_t getLastRunStart();
 
