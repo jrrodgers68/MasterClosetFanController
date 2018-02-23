@@ -8,6 +8,8 @@ Fan::Fan(int relayPin) : _relayPin(relayPin), _lastFanState(OFF)
 {
     pinMode(_relayPin, OUTPUT);
     digitalWrite(_relayPin, LOW);
+
+    _lastRunStart = Time.now();
 }
 
 
@@ -18,5 +20,15 @@ void Fan::setFanState(int state)
         digitalWrite(_relayPin, state);
         _lastFanState = state;
         EventPublisher::instance()->publishEvent("FAN", state == ON ? "ON" : "OFF");
+        if(state == ON)
+        {
+            _lastRunStart = Time.now();
+        }
     }
+}
+
+
+time_t Fan::getLastRunStart()
+{
+    return _lastRunStart;
 }
