@@ -10,6 +10,8 @@ Fan::Fan(int relayPin) : _relayPin(relayPin), _lastFanState(OFF)
     digitalWrite(_relayPin, LOW);
 
     _lastRunStart = Time.now();
+
+    Particle.variable("FanLastStart", _lastRunStart);
 }
 
 
