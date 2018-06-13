@@ -5,6 +5,7 @@
  * Date: 2/11/2018
  */
 
+#include "application.h"
 #include <string>
 #include "constants.h"
 #include "fan.h"
@@ -59,6 +60,7 @@ bool gMinRunMode = false;
                  if(Time.now() - fan.getLastRunStart() >= (6 * 3600))
                  {
                      state = ON;
+                     gMinRunMode = true;
                  }
              }
              else
@@ -67,6 +69,10 @@ bool gMinRunMode = false;
                  if(Time.now() - fan.getLastRunStart() < (20 * 60))
                  {
                      state = ON;
+                 }
+                 else
+                 {
+                     gMinRunMode = false;
                  }
              }
          }

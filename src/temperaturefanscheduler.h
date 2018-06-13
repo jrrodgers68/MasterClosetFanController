@@ -17,9 +17,12 @@ public:
 
 private:
     int _lastClosetTemp = 0;
+    int _closetTempTimestamp = 0;
     int _lastRoomTemp   = 0;
+    int _roomTempTimestamp = 0;
 
     void temperatureCallback(const char* event, const char* data);
+    void validateValues();
 };
 
 
