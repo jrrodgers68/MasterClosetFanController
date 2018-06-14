@@ -57,7 +57,7 @@ bool gMinRunMode = false;
              if(gMinRunMode == false)
              {
                  // make sure we run every 6 hours
-                 if(Time.now() - fan.getLastRunStart() >= (6 * 3600))
+                 if(fan.timeSinceLastRun() >= (6 * 3600))
                  {
                      state = ON;
                      gMinRunMode = true;
@@ -66,7 +66,7 @@ bool gMinRunMode = false;
              else
              {
                  // check if time to turn off - at 20 minutes
-                 if(Time.now() - fan.getLastRunStart() < (20 * 60))
+                 if(fan.timeSinceLastRun() < (20 * 60))
                  {
                      state = ON;
                  }

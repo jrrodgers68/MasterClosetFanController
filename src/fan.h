@@ -11,7 +11,8 @@ public:
     void setFanState(int state);
     int  getFanState();
 
-    time_t getLastRunStart();
+    //time_t getLastRunStart();
+    unsigned long timeSinceLastRun();
 
 private:
     int _relayPin;

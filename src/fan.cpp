@@ -35,7 +35,14 @@ int Fan::getFanState()
     return _lastFanState;
 }
 
+/*
 time_t Fan::getLastRunStart()
 {
     return _lastRunStart;
+}
+*/
+
+unsigned long Fan::timeSinceLastRun()
+{
+    return Time.now() - _lastRunStart;
 }
