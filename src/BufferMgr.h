@@ -1,6 +1,7 @@
 
 #pragma once
 
+#include <list>
 
 namespace ParticleMQTTWrapper {
 
@@ -12,6 +13,9 @@ private:
     static BufferMgr* _instance;
 
     BufferMgr();
+
+    std::list<Buffer*> _freeList;
+    std::list<Buffer*> _inuseList;
 
 public:
     static BufferMgr* instance()

@@ -19,12 +19,17 @@ public:
         _buffer = new char[maxSize];
     }
 
+    ~Buffer()
+    {
+        delete[] _buffer;
+    }
+
     char* buffer()
     {
         return _buffer;
     }
 
-    unsigned long size()
+    unsigned long& size()
     {
         return _size;
     }
