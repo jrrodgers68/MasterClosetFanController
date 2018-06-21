@@ -15,7 +15,7 @@
 
 #include "Publisher.h"
 #include "ParticleMQTTWrapper.h"
-
+using namespace MasterClosetFanController;
 
  // globals
 Switch lightSwitch(SWITCHPIN);

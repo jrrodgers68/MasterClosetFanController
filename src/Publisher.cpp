@@ -4,7 +4,7 @@
 #include "TopicMgr.h"
 #include "JsonMQTTMsgMgr.h"
 
-
+using namespace MasterClosetFanController;
 using namespace ParticleMQTTWrapper;
 
 

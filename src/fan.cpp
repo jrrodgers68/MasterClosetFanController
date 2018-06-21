@@ -1,8 +1,8 @@
 #include "fan.h"
 #include "constants.h"
 #include "EventPublisher.h"
-
-
+#include "Publisher.h"
+using namespace MasterClosetFanController;
 
 Fan::Fan(int relayPin) : _relayPin(relayPin), _lastFanState(OFF)
 {
@@ -22,6 +22,7 @@ void Fan::setFanState(int state)
         digitalWrite(_relayPin, state);
         _lastFanState = state;
         EventPublisher::instance()->publishEvent("FAN", state == ON ? "ON" : "OFF");
+        Publisher::writeLogMessage("fan/setFanState", state == ON ? "ON" : "OFF");
         if(state == ON)
         {
             _lastRunStart = Time.now();
