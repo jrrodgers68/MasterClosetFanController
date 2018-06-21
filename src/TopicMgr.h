@@ -26,6 +26,8 @@ public:
         return _instance;
     }
 
+    void init() { }
+
     void registerTopic(const char* name, const char* topic);
     const char* findTopic(const char* name);
 };

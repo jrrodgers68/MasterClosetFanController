@@ -13,6 +13,9 @@
 #include "fanscheduler.h"
 #include "fanschedulerfactory.h"
 
+#include "Publisher.h"
+#include "ParticleMQTTWrapper.h"
+
 
  // globals
 Switch lightSwitch(SWITCHPIN);
@@ -21,6 +24,10 @@ FanScheduler* fanScheduler = NULL;
 
 bool gMinRunMode = false;
 
+void callback(const char* topic, uint8_t* payload, unsigned int length)
+{
+    // do nothing for now
+}
 
  void setup()
  {
@@ -30,8 +37,12 @@ bool gMinRunMode = false;
      Time.zone(-5);
      Particle.syncTime();
 
+     init("MasterClosetFanController", callback);
+
      fanScheduler = FanSchedulerFactory::instance()->getScheduler(FanSchedulerFactory::TEMPERATURE);
      fanScheduler->init();
+
+     Publisher::writeLogMessage("main/setup", "completed setup function");
  }
 
 
@@ -39,9 +50,12 @@ bool gMinRunMode = false;
  {
      if (Particle.connected() == false)
      {
+         Publisher::writeLogMessage("main/loop", "trying to reconnect to Particle");
          Particle.connect();
          waitFor(Particle.connected, 10000);
      }
+
+     MQTTWrapper::instance()->loop();
 
      // basic logic - if switch is ON, just run the fan.  If off, run if its the scheduled time - otherwise fan is off
      if(lightSwitch.isOn())
@@ -61,6 +75,7 @@ bool gMinRunMode = false;
                  {
                      state = ON;
                      gMinRunMode = true;
+                     Publisher::writeLogMessage("main/loop", "starting to min run mode");
                  }
              }
              else
@@ -73,6 +88,7 @@ bool gMinRunMode = false;
                  else
                  {
                      gMinRunMode = false;
+                     Publisher::writeLogMessage("main/loop", "exiting min run mode");
                  }
              }
          }
