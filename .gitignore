@@ -34,3 +34,9 @@
 *.bin
 
 memory-use.log
+
+# folders
+target
+lib
+
+compile
