@@ -15,6 +15,7 @@ Publisher::Publisher()
 
 void Publisher::writeLogMessage(const char* source, const char* text)
 {
+
     // use LogMessagePayloadFormatter to generate a buffer
     LogMessagePayloadFormatter lmpf;
     Buffer* p = lmpf.writeMessage(source, text);
@@ -27,4 +28,5 @@ void Publisher::writeLogMessage(const char* source, const char* text)
             JsonMQTTMsgMgr::instance()->publish(topic, p);
         }
     }
+    
 }

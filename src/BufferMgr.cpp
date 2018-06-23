@@ -33,6 +33,7 @@ Buffer*  BufferMgr::allocate(unsigned long size)
             _inuseList.push_back(p);
             return p;
         }
+        it++;
     }
 
     // fixme: do some sanity checking on size!!
@@ -43,6 +44,11 @@ Buffer*  BufferMgr::allocate(unsigned long size)
 
 void BufferMgr::deallocate(Buffer* buffer)
 {
+    if(!buffer)
+    {
+        return;  // bail out, just a null pointer
+    }
+
     // find in inuseList and move to freeList
     bool removed = false;
     std::list<Buffer*>::iterator it = _inuseList.begin();
