@@ -13,9 +13,7 @@
 #include "fanscheduler.h"
 #include "fanschedulerfactory.h"
 
-#include "Publisher.h"
 #include "ParticleMQTTWrapper.h"
-using namespace MasterClosetFanController;
 
  // globals
 Switch lightSwitch(SWITCHPIN);

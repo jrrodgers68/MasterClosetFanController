@@ -4,7 +4,6 @@
 #include "TopicMgr.h"
 #include "JsonMQTTMsgMgr.h"
 
-using namespace MasterClosetFanController;
 using namespace ParticleMQTTWrapper;
 
 
@@ -28,5 +27,5 @@ void Publisher::writeLogMessage(const char* source, const char* text)
             JsonMQTTMsgMgr::instance()->publish(topic, p);
         }
     }
-    
+
 }

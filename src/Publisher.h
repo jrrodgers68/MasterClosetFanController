@@ -1,7 +1,7 @@
 #pragma once
 
 
-namespace MasterClosetFanController {
+namespace ParticleMQTTWrapper {
 
 
 class Publisher

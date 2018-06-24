@@ -6,6 +6,7 @@
 #include "TopicMgr.h"
 #include "JsonMQTTMsgMgr.h"
 #include "MQTTWrapper.h"
+#include "Publisher.h"
 
 using namespace ParticleMQTTWrapper;
 
