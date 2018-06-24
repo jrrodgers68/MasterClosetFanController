@@ -2,7 +2,8 @@
 #include "constants.h"
 #include "EventPublisher.h"
 #include "Publisher.h"
-using namespace MasterClosetFanController;
+using namespace ParticleMQTTWrapper;
+
 
 Fan::Fan(int relayPin) : _relayPin(relayPin), _lastFanState(OFF)
 {
@@ -36,12 +37,6 @@ int Fan::getFanState()
     return _lastFanState;
 }
 
-/*
-time_t Fan::getLastRunStart()
-{
-    return _lastRunStart;
-}
-*/
 
 unsigned long Fan::timeSinceLastRun()
 {
