@@ -35,7 +35,7 @@ void callback(const char* topic, uint8_t* payload, unsigned int length)
      Time.zone(-5);
      Particle.syncTime();
 
-     init("MasterClosetFanController", callback);
+     init("pi3_2", 1883, "MasterClosetFanController", callback);
 
      fanScheduler = FanSchedulerFactory::instance()->getScheduler(FanSchedulerFactory::TEMPERATURE);
      fanScheduler->init();
