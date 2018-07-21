@@ -32,15 +32,15 @@ void callback(const char* topic, uint8_t* payload, unsigned int length)
      Particle.connect();
      waitFor(Particle.connected, 30000);
 
-     Time.zone(-5);
+     Time.zone(-4);
      Particle.syncTime();
 
-     init("pi3_2", 1883, "MasterClosetFanController", callback);
+     ParticleMQTTWrapper::init("pi3_2", 1883, "MasterClosetFanController", callback);
 
      fanScheduler = FanSchedulerFactory::instance()->getScheduler(FanSchedulerFactory::TEMPERATURE);
      fanScheduler->init();
 
-     Publisher::writeLogMessage("main/setup", "completed setup function");
+     ParticleMQTTWrapper::Publisher::writeLogMessage("main/setup", "completed setup function");
  }
 
 
@@ -48,12 +48,12 @@ void callback(const char* topic, uint8_t* payload, unsigned int length)
  {
      if (Particle.connected() == false)
      {
-         Publisher::writeLogMessage("main/loop", "trying to reconnect to Particle");
+         ParticleMQTTWrapper::Publisher::writeLogMessage("main/loop", "trying to reconnect to Particle");
          Particle.connect();
-         waitFor(Particle.connected, 10000);
+         waitFor(Particle.connected, 2000);
      }
 
-     MQTTWrapper::instance()->loop();
+     ParticleMQTTWrapper::loop();
 
      // basic logic - if switch is ON, just run the fan.  If off, run if its the scheduled time - otherwise fan is off
      if(lightSwitch.isOn())
@@ -73,7 +73,7 @@ void callback(const char* topic, uint8_t* payload, unsigned int length)
                  {
                      state = ON;
                      gMinRunMode = true;
-                     Publisher::writeLogMessage("main/loop", "starting to min run mode");
+                     ParticleMQTTWrapper::Publisher::writeLogMessage("main/loop", "starting to min run mode");
                  }
              }
              else
@@ -86,7 +86,7 @@ void callback(const char* topic, uint8_t* payload, unsigned int length)
                  else
                  {
                      gMinRunMode = false;
-                     Publisher::writeLogMessage("main/loop", "exiting min run mode");
+                     ParticleMQTTWrapper::Publisher::writeLogMessage("main/loop", "exiting min run mode");
                  }
              }
          }

@@ -16,7 +16,7 @@ void EventPublisher::publishEvent(const char* name, const char* value)
     if(Particle.connected() == false)
     {
         Particle.connect();
-        waitFor(Particle.connected, 10000);
+        waitFor(Particle.connected, 2000);
         if(Particle.connected() == false)
         {
             _failedEventsCounter++;
