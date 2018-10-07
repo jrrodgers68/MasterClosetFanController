@@ -15,6 +15,7 @@ public:
           return _instance;
     }
 
+    void init();
     void publishEvent(const char* name, const char* value);
 
 private:

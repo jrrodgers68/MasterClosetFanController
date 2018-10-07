@@ -5,10 +5,14 @@ EventPublisher* EventPublisher::_instance = NULL;
 
 EventPublisher::EventPublisher()
 {
+}
+
+void EventPublisher::init()
+{
     // register our variables
     Particle.variable("EP_discards", this->_discardedEventsCounter);
     Particle.variable("EP_failed", this->_failedEventsCounter);
-    Particle.variable("EP_lastPub", this->_lastPublishTimeS);
+    Particle.variable("EP_lastPub", this->_lastPublishTimeS);    
 }
 
 void EventPublisher::publishEvent(const char* name, const char* value)

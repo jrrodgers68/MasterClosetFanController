@@ -12,7 +12,7 @@
 #include "switch.h"
 #include "fanscheduler.h"
 #include "fanschedulerfactory.h"
-
+#include "EventPublisher.h"
 #include "ParticleMQTTWrapper.h"
 
  // globals
@@ -40,6 +40,9 @@ void callback(const char* topic, uint8_t* payload, unsigned int length)
      fanScheduler = FanSchedulerFactory::instance()->getScheduler(FanSchedulerFactory::TEMPERATURE);
      fanScheduler->init();
 
+     fan.init();
+     EventPublisher::instance()->init();
+
      ParticleMQTTWrapper::Publisher::writeLogMessage("main/setup", "completed setup function");
  }
 
@@ -52,6 +55,7 @@ void callback(const char* topic, uint8_t* payload, unsigned int length)
          Particle.connect();
          waitFor(Particle.connected, 2000);
      }
+
 
      ParticleMQTTWrapper::loop();
 

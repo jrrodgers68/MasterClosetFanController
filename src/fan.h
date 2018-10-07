@@ -7,6 +7,7 @@ class Fan
 {
 public:
     Fan(int relayPin);
+    void init();
 
     void setFanState(int state);
     int  getFanState();
