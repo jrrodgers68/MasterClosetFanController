@@ -13,7 +13,8 @@
 #define ON   1
 
 
-
+#define USE_PARTICLE        1
+#define USE_MQTT            2
 
 
 #endif
