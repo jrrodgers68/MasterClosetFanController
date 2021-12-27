@@ -1,4 +1,4 @@
-#ifdef  CONFIGSETTINGS_H
+#ifndef  CONFIGSETTINGS_H
 #define CONFIGSETTINGS_H
 
 
@@ -21,7 +21,7 @@ public:
     void init(int implType);
 
 private:
-    ConfigSettings* _instance;
+    static ConfigSettings* _instance;
 
     ConfigSettingsImpl* _impl;
 

@@ -15,7 +15,7 @@
 
 
  // globals
-Switch lightSwitch(SWITCHPIN);
+//Switch lightSwitch(SWITCHPIN);
 Fan  fan(RELAYPIN);
 FanScheduler* fanScheduler = NULL;
 
@@ -63,7 +63,7 @@ bool isDST(int day, int month, int dow)
     Time.zone(offset);
     Particle.syncTime();
 
-    fanScheduler = FanSchedulerFactory::instance()->getScheduler(FanSchedulerFactory::TEMPERATURE);
+    fanScheduler = FanSchedulerFactory::instance()->getScheduler(FanSchedulerFactory::DURATION);
     fanScheduler->init();
  }
 
@@ -77,38 +77,31 @@ bool isDST(int day, int month, int dow)
     }
 
     // basic logic - if switch is ON, just run the fan.  If off, run if its the scheduled time - otherwise fan is off
-    if(lightSwitch.isOn())
+    int state = fanScheduler->isTimeToRun(fan.getFanState()) ? ON : OFF;
+    if(state == OFF)
     {
-        fan.setFanState(ON);
-    }
-    else
-    {
-        int state = fanScheduler->isTimeToRun(fan.getFanState()) ? ON : OFF;
-        if(state == OFF)
+        if(gMinRunMode == false)
         {
-            if(gMinRunMode == false)
+            // make sure we run every 6 hours
+            if(Time.now() - fan.getLastRunStart() >= (6 * 3600))
             {
-                // make sure we run every 6 hours
-                if(Time.now() - fan.getLastRunStart() >= (6 * 3600))
-                {
-                    state = ON;
-                    gMinRunMode = true;
-                }
+                state = ON;
+                gMinRunMode = true;
+            }
+        }
+        else
+        {
+            // check if time to turn off - at 20 minutes
+            if(Time.now() - fan.getLastRunStart() < (20 * 60))
+            {
+                state = ON;
             }
             else
             {
-                // check if time to turn off - at 20 minutes
-                if(Time.now() - fan.getLastRunStart() < (20 * 60))
-                {
-                    state = ON;
-                }
-                else
-                {
-                    gMinRunMode = false;
-                }
+                gMinRunMode = false;
             }
         }
-
-        fan.setFanState(state);
     }
+
+    fan.setFanState(state);
  }

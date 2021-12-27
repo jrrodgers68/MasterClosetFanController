@@ -2,11 +2,12 @@
 #include "configsettings.h"
 
 ConfigSettings* ConfigSettings::_instance = NULL;
-ConfigSettingsImpl* ConfigSettings::_impl = NULL;
+//ConfigSettingsImpl* ConfigSettings::_impl = NULL;
 
 
 ConfigSettings::ConfigSettings(/* args */)
 {
+    _impl = NULL;
 }
 
 

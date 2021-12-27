@@ -11,7 +11,7 @@ Fan::Fan(int relayPin) : _relayPin(relayPin), _lastFanState(OFF)
 
     _lastRunStart = Time.now();
 
-    Particle.variable("FanLastStart", _lastRunStart);
+    //Particle.variable("FanLastStart", _lastRunStart);
 }
 
 
